@@ -1,0 +1,17 @@
+{
+  "name": "site_avell-v1.0",
+  "version": "1.0.0",
+  "description": "site avell v1.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eduardo Alves",
+  "license": "ISC",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "pg": "^7.18.1"
+  }
+}

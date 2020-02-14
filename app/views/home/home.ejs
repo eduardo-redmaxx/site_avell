@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript"></script>
+</head>
+
+<body>
+    <h1>Site Avell</h1>
+
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>ComponenteA</td>
+            <td>ComponenteB</td>
+            <td>Diferença</td>
+        </tr>
+
+        <% for(var i = 0; i < consulta.length; i++) { %>
+        <tr>
+            <td><%= consulta[i].cod_catalogo %></td>
+            <td><%= consulta[i].comp1 %></td>
+            <td><%= consulta[i].comp2 %></td>
+            <td><%= consulta[i].dif %></td>
+        </tr>
+        <% } %>
+
+    </table>
+</body>
+</html>
