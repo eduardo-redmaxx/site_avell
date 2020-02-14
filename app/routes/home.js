@@ -7,8 +7,8 @@ module.exports = function(app){
         const config = {
             host: 'localhost',
             user: 'postgres',     
-            password: 'controle',
-            database: 'site_avell'
+            password: 'MudarAgora',
+            database: 'db_agente_avell'
         };
 
         const client = new pg.Client(config);
