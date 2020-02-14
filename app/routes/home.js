@@ -29,7 +29,7 @@ module.exports = function(app){
                     const rows = res.rows;
         
                     rows.map(row => {
-                        // result.send(rows);
+                        result.send(rows);
                         result.render("home/home", {consulta : rows});
                     });
                     
