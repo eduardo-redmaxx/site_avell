@@ -19,8 +19,6 @@ module.exports = function(app){
         });
 
         function queryDatabase() {
-  
-            // console.log(`Running query to PostgreSQL server: ${config.host}`);
         
             const query = 'SELECT * FROM tb_agente_avell;';
         
@@ -30,7 +28,7 @@ module.exports = function(app){
         
                     rows.map(row => {
                         // result.send(rows);
-                        result.render("home/home", {consulta : rows});
+                        result.render("home/home", {consulta : res.rows});
                     });
                     
                     process.exit();
