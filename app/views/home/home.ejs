@@ -7,24 +7,28 @@
 </head>
 
 <body>
-    <h1>Site Avell - 3</h1>
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>ComponenteA</td>
-            <td>ComponenteB</td>
-            <td>Diferença</td>
-        </tr>
 
-        <% for(var i = 0; i < consulta.length; i++) { %>
-        <tr>
-            <td><%= consulta[i].cod_catalogo %></td>
-            <td><%= consulta[i].comp1 %></td>
-            <td><%= consulta[i].comp2 %></td>
-            <td><%= consulta[i].dif %></td>
-        </tr>
-        <% } %>
+     <div>
+        <h1>Site Avell</h1>
+        <table>
+            <tr>
+                <td>Id</td>
+                <td>CompA</td>
+                <td>CompB</td>
+                <td>Dif</td>
+            </tr>
+    
+            <% for(var i = 0; i < consulta.length; i++) { %>
+            <tr>
+                <td><%= consulta[i].cod_catalogo %></td>
+                <td><%= consulta[i].comp1 %></td>
+                <td><%= consulta[i].comp2 %></td>
+                <td><%= consulta[i].dif %></td>
+            </tr>
+            <% } %>
+   
+        </table>
+     </div>
 
-    </table>
 </body>
 </html>

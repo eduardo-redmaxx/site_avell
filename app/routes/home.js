@@ -1,16 +1,16 @@
 module.exports = function(app){
 
-    app.get('/', function(req, result){
+    app.get('/:cod_catalogo', function(req, result){ 
 
         const pg = require('pg');
 
         const config = {
             host: 'localhost',
             user: 'postgres',     
-            password: 'MudarAgora',
-            database: 'db_agente_avell'            
-            // password: 'controle',
-            // database: 'site_avell'
+            // password: 'MudarAgora',
+            // database: 'db_agente_avell'            
+            password: 'controle',
+            database: 'site_avell'
         };
 
         const client = new pg.Client(config);
@@ -21,9 +21,9 @@ module.exports = function(app){
         });
 
         function queryDatabase() {
-        
-            const query = 'SELECT * FROM tb_agente_avell;';
-        
+
+            var query = "SELECT * FROM tb_agente_avell where cod_catalogo = '"+req.params.cod_catalogo+"';";
+            
             client.query(query)
                 .then(res => {
                     const rows = res.rows;
@@ -31,6 +31,8 @@ module.exports = function(app){
                     rows.map(row => {
                         // result.send(rows);
                         result.render("home/home", {consulta : res.rows});
+                        // result.render("home/home", {consulta : getParamentro});
+
                     });
                     
                     process.exit();
@@ -38,6 +40,7 @@ module.exports = function(app){
                 .catch(err => {
                     console.log(err);
                 });
-        };
+        };    
+
     });
 };    
