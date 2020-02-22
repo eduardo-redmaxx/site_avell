@@ -1,5 +1,7 @@
 module.exports = function(app){
 
+    var path = require("path");
+
     app.get('/:cod_catalogo', function(req, result){ 
 
         const pg = require('pg');
@@ -30,12 +32,12 @@ module.exports = function(app){
         
                     rows.map(row => {
                         // result.send(rows);
-                        result.render("home/home", {consulta : res.rows});
+                        result.render("./home/home", {consulta : res.rows});
                         // result.render("home/home", {consulta : getParamentro});
 
                     });
                     
-                    process.exit();
+                    // process.exit();
                 })
                 .catch(err => {
                     console.log(err);
