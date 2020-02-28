@@ -24,7 +24,7 @@ module.exports = function(app){
 
         function queryDatabase() {
 
-            var query = "SELECT * FROM tb_agente_avell"; //where cod_catalogo = '"+req.params.cod_catalogo+"';";
+            var query = "SELECT * FROM tb_agente_odoo_teste";// where cod_catalogo = '"+req.params.cod_catalogo+"';";
             
             client.query(query)
                 .then(res => {
