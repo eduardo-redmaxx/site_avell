@@ -2,7 +2,7 @@ module.exports = function(app){
 
     var path = require("path");
 
-    app.get('/:cod_catalogo', function(req, result){ 
+    app.get('/', function(req, result){ 
 
         const pg = require('pg');
 
@@ -24,19 +24,17 @@ module.exports = function(app){
 
         function queryDatabase() {
 
-            var query = "SELECT * FROM tb_agente_avell where cod_catalogo = '"+req.params.cod_catalogo+"';";
+            var query = "SELECT * FROM tb_agente_avell"; //where cod_catalogo = '"+req.params.cod_catalogo+"';";
             
             client.query(query)
                 .then(res => {
                     const rows = res.rows;
         
                     rows.map(row => {
-                        // result.send(rows);
-                        result.render("./home/home", {consulta : res.rows});
+                        result.send(rows);
+                        // result.render("./home/home", {consulta : res.rows});
                         // result.render("home/home", {consulta : getParamentro});
-
-                    });
-                    
+                    });                 
                     // process.exit();
                 })
                 .catch(err => {
