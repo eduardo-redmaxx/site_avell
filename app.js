@@ -6,9 +6,10 @@ const port = 3000
 //   response.json({ info: 'Node.js, Express, and Postgres API' })
 // })
 
-app.get('/', db.getUsers)
-app.get('/:id', db.getUserById)
-app.post('/', db.createUser)
+app.get('/api', db.getDados)
+app.get('/api/:id', db.getDadosById)
+app.post('/api/agente', db.createAgente)
+app.post('/api/catalogo', db.createCatalogo)
 // app.put('/users/:id', db.updateUser)
 // app.delete('/users/:id', db.deleteUser)
 

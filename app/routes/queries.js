@@ -2,15 +2,13 @@ const Pool = require('pg').Pool
 const pool = new Pool({
     host: 'localhost',
     user: 'postgres',     
-    // password: 'MudarAgora',
-    // database: 'db_agente_avell'            
-    password: 'controle',
-    database: 'site_avell',
+    password: 'MudarAgora',
+    database: 'db_agente_avell',            
     port: 5432,
 })
 
-const getUsers = (request, response) => {
-  pool.query('SELECT * FROM tb_agente_odoo ORDER BY age_cod ASC', (error, results) => {
+const getDados = (request, response) => {
+  pool.query('SELECT * FROM tb_catalogo_odoo_teste ORDER BY cat_cod ASC', (error, results) => {
     if (error) {
       throw error
     }
@@ -18,10 +16,10 @@ const getUsers = (request, response) => {
   })
 }
 
-const getUserById = (request, response) => {
-  const id = parseInt(request.params.id)
+const getDadosById = (request, response) => {
+  const age_serial_number = parseInt(request.params.id)
 
-  pool.query('SELECT * FROM tb_agente_odoo WHERE id = $1', [id], (error, results) => {
+  pool.query('SELECT * FROM tb_agente_odoo_teste WHERE age_serial_number = $1', [age_serial_number], (error, results) => {
     if (error) {
       throw error
     }
@@ -29,19 +27,31 @@ const getUserById = (request, response) => {
   })
 }
 
-const createUser = (request, response) => {
+const createAgente = (request, response) => {
   const { age_cod, age_serial_number, age_comp, age_prop, age_valor, age_data } = request.body  
 
-  pool.query("INSERT INTO tb_agente_odoo (age_cod, age_serial_number, age_comp, age_prop, age_valor, age_data) VALUES ($1, $2, $3, $4, $5, $6)", [age_cod, age_serial_number, age_comp, age_prop, age_valor, age_data], (error, results) => {
+  pool.query("INSERT INTO tb_agente_odoo_teste (age_cod, age_serial_number, age_comp, age_prop, age_valor, age_data) VALUES ($1, $2, $3, $4, $5, $6)", [age_cod, age_serial_number, age_comp, age_prop, age_valor, age_data], (error, results) => {
     if (error) {
       throw error
     }
-    response.status(201).send('Cadastrado com sucesso')
+    response.status(201).send('Agente exportado com sucesso')
+  })
+}
+
+const createCatalogo = (request, response) => {
+  const { cat_cod, cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data } = request.body  
+
+  pool.query("INSERT INTO tb_catalogo_odoo_teste (cat_cod, cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data) VALUES ($1, $2, $3, $4, $5, $6)", [cat_cod, cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(201).send('Catalogo exportado com sucesso')
   })
 }
 
 module.exports = {
-  getUsers,
-  getUserById,
-  createUser
+  getDados,
+  getDadosById,
+  createAgente,
+  createCatalogo
 }
