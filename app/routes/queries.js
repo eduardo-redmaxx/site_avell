@@ -68,9 +68,9 @@ const getDadosAgenteById = (request, response) => {
 }
 
 const createAgente = (request, response) => {
-  const { age_cod, age_serial_number, age_comp, age_prop, age_valor, age_data } = request.body  
+  const { age_serial_number, age_comp, age_prop, age_valor, age_data } = request.body  
 
-  pool.query("INSERT INTO tb_agente_odoo_teste (age_cod, age_serial_number, age_comp, age_prop, age_valor, age_data) VALUES ($1, $2, $3, $4, $5, $6)", [age_cod, age_serial_number, age_comp, age_prop, age_valor, age_data], (error, results) => {
+  pool.query("INSERT INTO tb_agente_odoo_teste (age_serial_number, age_comp, age_prop, age_valor, age_data) VALUES ($1, $2, $3, $4, $5)", [age_serial_number, age_comp, age_prop, age_valor, age_data], (error, results) => {
     if (error) {
       throw error
     }
@@ -79,9 +79,9 @@ const createAgente = (request, response) => {
 }
 
 const createCatalogo = (request, response) => {
-  const { cat_cod, cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data } = request.body  
+  const { cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data } = request.body  
 
-  pool.query("INSERT INTO tb_catalogo_odoo_teste (cat_cod, cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data) VALUES ($1, $2, $3, $4, $5, $6)", [cat_cod, cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data], (error, results) => {
+  pool.query("INSERT INTO tb_catalogo_odoo_teste (cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data) VALUES ($1, $2, $3, $4, $5)", [cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data], (error, results) => {
     if (error) {
       throw error
     }
