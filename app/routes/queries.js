@@ -16,7 +16,47 @@ const getDados = (request, response) => {
   })
 }
 
+const getDadosCatalogo = (request, response) => {
+  pool.query('SELECT * FROM tb_catalogo_odoo_teste ORDER BY cat_cod ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const getDadosAgente = (request, response) => {
+  pool.query('SELECT * FROM tb_agente_odoo_teste ORDER BY age_cod ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 const getDadosById = (request, response) => {
+  const serial_number = parseInt(request.params.id)
+
+  pool.query('SELECT * FROM tb_agente_odoo_teste WHERE age_serial_number = $1', [serial_number], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const getDadosCatalogoById = (request, response) => {
+  const cat_serial_number = parseInt(request.params.id)
+
+  pool.query('SELECT * FROM tb_catalogo_odoo_teste WHERE cat_serial_number = $1', [cat_serial_number], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+const getDadosAgenteById = (request, response) => {
   const age_serial_number = parseInt(request.params.id)
 
   pool.query('SELECT * FROM tb_agente_odoo_teste WHERE age_serial_number = $1', [age_serial_number], (error, results) => {
@@ -51,7 +91,11 @@ const createCatalogo = (request, response) => {
 
 module.exports = {
   getDados,
+  getDadosCatalogo,
+  getDadosAgente,
   getDadosById,
+  getDadosCatalogoById,
+  getDadosAgenteById,
   createAgente,
   createCatalogo
 }

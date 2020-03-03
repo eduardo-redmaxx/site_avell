@@ -7,7 +7,11 @@ const port = 3000
 // })
 
 app.get('/api', db.getDados)
+app.get('/api/catalogo', db.getDadosCatalogo)
+app.get('/api/agente', db.getDadosAgente)
 app.get('/api/:id', db.getDadosById)
+app.get('/api/catalogo/:id', db.getDadosCatalogoById)
+app.get('/api/agente/:id', db.getDadosAgenteById)
 app.post('/api/agente', db.createAgente)
 app.post('/api/catalogo', db.createCatalogo)
 // app.put('/users/:id', db.updateUser)
