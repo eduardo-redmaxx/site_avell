@@ -68,9 +68,9 @@ const getDadosAgenteById = (request, response) => {
 }
 
 const createAgente = (request, response) => {
-  const { age_serial_number, age_comp, age_prop, age_valor, age_data } = request.body  
+  const { age_serial_number, age_comp, age_comp_id, age_data } = request.body  
 
-  pool.query("INSERT INTO tb_agente_odoo_teste (age_serial_number, age_comp, age_prop, age_valor, age_data) VALUES ($1, $2, $3, $4, $5)", [age_serial_number, age_comp, age_prop, age_valor, age_data], (error, results) => {
+  pool.query("INSERT INTO tb_agente_odoo_teste (age_serial_number, age_comp, age_comp_id, age_data) VALUES ($1, $2, $3, $4)", [age_serial_number, age_comp, age_comp_id, age_data], (error, results) => {
     if (error) {
       throw error
     }
