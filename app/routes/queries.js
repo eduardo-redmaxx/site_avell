@@ -79,9 +79,9 @@ const createAgente = (request, response) => {
 }
 
 const createCatalogo = (request, response) => {
-  const { cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data } = request.body  
+  const { cat_serial_number, cat_comp, cat_comp_id, cat_prop, cat_valor, cat_data } = request.body  
 
-  pool.query("INSERT INTO tb_catalogo_odoo_teste (cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data) VALUES ($1, $2, $3, $4, $5)", [cat_serial_number, cat_comp, cat_prop, cat_valor, cat_data], (error, results) => {
+  pool.query("INSERT INTO tb_catalogo_odoo_teste (cat_serial_number, cat_comp, cat_comp_id, cat_prop, cat_valor, cat_data) VALUES ($1, $2, $3, $4, $5, $6)", [cat_serial_number, cat_comp, cat_comp_id, cat_prop, cat_valor, cat_data], (error, results) => {
     if (error) {
       throw error
     }
