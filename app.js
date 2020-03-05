@@ -12,9 +12,9 @@ app.get('/api/agente', db.getDadosAgente)
 app.get('/api/:id', db.getDadosById)
 app.get('/api/catalogo/:id', db.getDadosCatalogoById)
 app.get('/api/agente/:id', db.getDadosAgenteById)
+app.put('/api/agente/:id', db.updateAgente)
 app.post('/api/agente', db.createAgente)
 app.post('/api/catalogo', db.createCatalogo)
-// app.put('/users/:id', db.updateUser)
 // app.delete('/users/:id', db.deleteUser)
 
 app.listen(3000, function(){

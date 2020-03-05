@@ -92,6 +92,17 @@ const createCatalogo = (request, response) => {
   })
 }
 
+const updateAgente = (request, response) => {
+  const { age_status } = request.body
+
+  pool.query('UPDATE tb_agente_odoo_teste SET age_status = $1 WHERE age_cod = $2',[age_status, request.params.id],(error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).send('Registro atualizado com sucesso')
+    })
+}
+
 module.exports = {
   getDados,
   getDadosCatalogo,
@@ -100,5 +111,6 @@ module.exports = {
   getDadosCatalogoById,
   getDadosAgenteById,
   createAgente,
-  createCatalogo
+  createCatalogo,
+  updateAgente
 }
