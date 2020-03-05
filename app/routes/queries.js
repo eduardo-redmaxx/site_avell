@@ -35,20 +35,25 @@ const getDadosAgente = (request, response) => {
 }
 
 const getDadosById = (request, response) => {
-  const age_serial_number = parseInt(request.params.age_serial_number)
-
-  pool.query("SELECT * FROM tb_agente_odoo_teste WHERE age_serial_number = $1", [age_serial_number], (error, results) => {
+  pool.query("SELECT DISTINCT a.cat_serial_number AS SERIAL_NUMBER, a.cat_comp as COMP_CATALOGO, a.cat_prop as PROP_CATALOGO, a.cat_valor as VAL_CATALOGO "+
+             "     , b.age_comp as COMP_AGENTE , case when a.cat_comp_id = b.age_comp_id then a.cat_prop ELSE '' END as PROP_AGENTE "+
+             "     , case when a.cat_comp_id = b.age_comp_id then a.cat_valor ELSE '' END as VAL_AGENTE "+
+             "     , case when a.cat_comp_id = b.age_comp_id then 'S' ELSE 'N' END AS STATUS "+
+             "  FROM tb_catalogo_odoo_teste a "+
+             "  LEFT JOIN tb_agente_odoo_teste b  "+
+             "    ON b.age_serial_number = a.cat_serial_number "+
+             "   AND b.age_comp_id = a.cat_comp_id "+
+             " WHERE a.cat_serial_number = $1", [request.params.id], (error, results) => {
     if (error) {
       throw error
+
     }
     response.status(200).json(results.rows)
   })
 }
 
 const getDadosCatalogoById = (request, response) => {
-  const cat_serial_number = parseInt(request.params.id)
-
-  pool.query("SELECT * FROM tb_catalogo_odoo_teste WHERE cat_serial_number = $1", [cat_serial_number], (error, results) => {
+  pool.query("SELECT * FROM tb_catalogo_odoo_teste WHERE cat_serial_number = $1", [request.params.id], (error, results) => {
     if (error) {
       throw error
     }
@@ -57,8 +62,6 @@ const getDadosCatalogoById = (request, response) => {
 }
 
 const getDadosAgenteById = (request, response) => {
-  const age_serial_number = parseInt(request.params.id)
-
   pool.query('SELECT * FROM tb_agente_odoo_teste WHERE age_serial_number = $1', [request.params.id], (error, results) => {
     if (error) {
       throw error
