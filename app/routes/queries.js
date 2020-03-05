@@ -8,7 +8,7 @@ const pool = new Pool({
 })
 
 const getDados = (request, response) => {
-  pool.query('SELECT * FROM tb_catalogo_odoo_teste ORDER BY cat_cod ASC', (error, results) => {
+  pool.query("SELECT * FROM tb_catalogo_odoo_teste ORDER BY cat_cod ASC", (error, results) => {
     if (error) {
       throw error
     }
@@ -17,7 +17,7 @@ const getDados = (request, response) => {
 }
 
 const getDadosCatalogo = (request, response) => {
-  pool.query('SELECT * FROM tb_catalogo_odoo_teste ORDER BY cat_cod ASC', (error, results) => {
+  pool.query("SELECT * FROM tb_catalogo_odoo_teste ORDER BY cat_cod ASC", (error, results) => {
     if (error) {
       throw error
     }
@@ -26,7 +26,7 @@ const getDadosCatalogo = (request, response) => {
 }
 
 const getDadosAgente = (request, response) => {
-  pool.query('SELECT * FROM tb_agente_odoo_teste ORDER BY age_cod ASC', (error, results) => {
+  pool.query("SELECT * FROM tb_agente_odoo_teste ORDER BY age_cod ASC", (error, results) => {
     if (error) {
       throw error
     }
@@ -35,9 +35,9 @@ const getDadosAgente = (request, response) => {
 }
 
 const getDadosById = (request, response) => {
-  const serial_number = parseInt(request.params.id)
+  const age_serial_number = parseInt(request.params.age_serial_number)
 
-  pool.query('SELECT * FROM tb_agente_odoo_teste WHERE age_serial_number = $1', [serial_number], (error, results) => {
+  pool.query("SELECT * FROM tb_agente_odoo_teste WHERE age_serial_number = $1", [age_serial_number], (error, results) => {
     if (error) {
       throw error
     }
@@ -48,7 +48,7 @@ const getDadosById = (request, response) => {
 const getDadosCatalogoById = (request, response) => {
   const cat_serial_number = parseInt(request.params.id)
 
-  pool.query('SELECT * FROM tb_catalogo_odoo_teste WHERE cat_serial_number = $1', [cat_serial_number], (error, results) => {
+  pool.query("SELECT * FROM tb_catalogo_odoo_teste WHERE cat_serial_number = $1", [cat_serial_number], (error, results) => {
     if (error) {
       throw error
     }
@@ -59,7 +59,7 @@ const getDadosCatalogoById = (request, response) => {
 const getDadosAgenteById = (request, response) => {
   const age_serial_number = parseInt(request.params.id)
 
-  pool.query('SELECT * FROM tb_agente_odoo_teste WHERE age_serial_number = $1', [age_serial_number], (error, results) => {
+  pool.query('SELECT * FROM tb_agente_odoo_teste WHERE age_serial_number = $1', [request.params.id], (error, results) => {
     if (error) {
       throw error
     }
