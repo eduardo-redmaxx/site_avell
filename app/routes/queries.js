@@ -35,8 +35,12 @@ const getDadosAgente = (request, response) => {
 }
 
 const getDadosById = (request, response) => {
-  pool.query("SELECT DISTINCT a.cat_serial_number AS SERIAL_NUMBER, a.cat_comp as COMP_CATALOGO, a.cat_prop as PROP_CATALOGO, a.cat_valor as VAL_CATALOGO "+
-             "     , b.age_comp as COMP_AGENTE , case when a.cat_comp_id = b.age_comp_id then a.cat_prop ELSE '' END as PROP_AGENTE "+
+  pool.query("SELECT DISTINCT a.cat_serial_number AS SERIAL_NUMBER "+
+             "     , a.cat_comp as COMP_CATALOGO "+
+             "     , a.cat_prop as PROP_CATALOGO "+
+             "     , a.cat_valor as VAL_CATALOGO "+
+             "     , b.age_comp as COMP_AGENTE "+
+             "     , case when a.cat_comp_id = b.age_comp_id then a.cat_prop ELSE '' END as PROP_AGENTE "+
              "     , case when a.cat_comp_id = b.age_comp_id then a.cat_valor ELSE '' END as VAL_AGENTE "+
              "     , case when a.cat_comp_id = b.age_comp_id then 'S' ELSE 'N' END AS STATUS "+
              "  FROM tb_catalogo_odoo_teste a "+
@@ -73,7 +77,8 @@ const getDadosAgenteById = (request, response) => {
 const createAgente = (request, response) => {
   const { age_serial_number, age_comp, age_comp_id, age_data } = request.body  
 
-  pool.query("INSERT INTO tb_agente_odoo_teste (age_serial_number, age_comp, age_comp_id, age_data) VALUES ($1, $2, $3, $4)", [age_serial_number, age_comp, age_comp_id, age_data], (error, results) => {
+  pool.query("INSERT INTO tb_agente_odoo_teste (age_serial_number, age_comp, age_comp_id, age_data) "+
+             "VALUES ($1, $2, $3, $4)", [age_serial_number, age_comp, age_comp_id, age_data], (error, results) => {
     if (error) {
       throw error
     }
@@ -84,23 +89,13 @@ const createAgente = (request, response) => {
 const createCatalogo = (request, response) => {
   const { cat_serial_number, cat_comp, cat_comp_id, cat_prop, cat_valor, cat_data } = request.body  
 
-  pool.query("INSERT INTO tb_catalogo_odoo_teste (cat_serial_number, cat_comp, cat_comp_id, cat_prop, cat_valor, cat_data) VALUES ($1, $2, $3, $4, $5, $6)", [cat_serial_number, cat_comp, cat_comp_id, cat_prop, cat_valor, cat_data], (error, results) => {
+  pool.query("INSERT INTO tb_catalogo_odoo_teste (cat_serial_number, cat_comp, cat_comp_id, cat_prop, cat_valor, cat_data) "+
+             "VALUES ($1, $2, $3, $4, $5, $6)", [cat_serial_number, cat_comp, cat_comp_id, cat_prop, cat_valor, cat_data], (error, results) => {
     if (error) {
       throw error
     }
     response.status(201).send('Catalogo exportado com sucesso')
   })
-}
-
-const updateAgente = (request, response) => {
-  const { age_status } = request.body
-
-  pool.query('UPDATE tb_agente_odoo_teste SET age_status = $1 WHERE age_cod = $2',[age_status, request.params.id],(error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).send('Registro atualizado com sucesso')
-    })
 }
 
 module.exports = {
@@ -111,6 +106,5 @@ module.exports = {
   getDadosCatalogoById,
   getDadosAgenteById,
   createAgente,
-  createCatalogo,
-  updateAgente
+  createCatalogo
 }

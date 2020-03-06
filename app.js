@@ -1,5 +1,6 @@
-const app = require('./config/server');
-const db = require('./app/routes/queries.js')
+const path = require('path');
+const app = require(path.resolve('./config/server'));
+const db = require(path.resolve('./app/routes/queries.js'))
 const port = 3000
 
 // app.get('/', (request, response) => {
@@ -12,7 +13,6 @@ app.get('/api/agente', db.getDadosAgente)
 app.get('/api/:id', db.getDadosById)
 app.get('/api/catalogo/:id', db.getDadosCatalogoById)
 app.get('/api/agente/:id', db.getDadosAgenteById)
-app.put('/api/agente/:id', db.updateAgente)
 app.post('/api/agente', db.createAgente)
 app.post('/api/catalogo', db.createCatalogo)
 // app.delete('/users/:id', db.deleteUser)
