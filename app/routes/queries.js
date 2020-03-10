@@ -40,13 +40,12 @@ const getDadosById = (request, response) => {
              "     , a.cat_prop as PROP_CATALOGO "+
              "     , a.cat_valor as VAL_CATALOGO "+
              "     , b.age_comp as COMP_AGENTE "+
-             "     , case when a.cat_comp_id = b.age_comp_id then a.cat_prop ELSE '' END as PROP_AGENTE "+
-             "     , case when a.cat_comp_id = b.age_comp_id then a.cat_valor ELSE '' END as VAL_AGENTE "+
-             "     , case when a.cat_comp_id = b.age_comp_id then 'S' ELSE 'N' END AS STATUS "+
+             "     , case when b.age_serial_number = a.cat_serial_number then a.cat_prop ELSE '' END as PROP_AGENTE "+
+             "     , case when b.age_serial_number = a.cat_serial_number then a.cat_valor ELSE '' END as VAL_AGENTE "+
+             "     , case when b.age_serial_number = a.cat_serial_number then 'S' ELSE 'N' END AS STATUS "+
              "  FROM tb_catalogo_odoo_teste a "+
              "  LEFT JOIN tb_agente_odoo_teste b  "+
              "    ON b.age_serial_number = a.cat_serial_number "+
-             "   AND b.age_comp_id = a.cat_comp_id "+
              " WHERE a.cat_serial_number = $1", [request.params.id], (error, results) => {
     if (error) {
       throw error
