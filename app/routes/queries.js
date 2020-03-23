@@ -39,7 +39,7 @@ const getDadosById = (request, response) => {
              "     , a.cat_comp as COMP_CATALOGO "+
              "     , a.cat_prop as PROP_CATALOGO "+
              "     , a.cat_valor as VAL_CATALOGO "+
-             "     , b.age_comp as COMP_AGENTE "+
+             "     , case when a.cat_comp_id = b.age_comp_id then a.cat_comp ELSE b.age_comp END as COMP_AGENTE "+
              "     , case when b.age_serial_number = a.cat_serial_number then a.cat_prop ELSE '' END as PROP_AGENTE "+
              "     , case when b.age_serial_number = a.cat_serial_number then a.cat_valor ELSE '' END as VAL_AGENTE "+
              "     , case when b.age_serial_number = a.cat_serial_number then 'S' ELSE 'N' END AS STATUS "+
